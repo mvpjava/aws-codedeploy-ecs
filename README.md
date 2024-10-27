@@ -2,7 +2,7 @@
 it is an arm64 arch and that the task definition specifies this as a setting.
 If you do not want to specify this setting in task defn then you have to use "docker build --platform ".
 
-I also create the ECR repo manually , no template for that...yet
+I also create the ECR repo manually and pushed the image already , no template for that...yet
 
 
 - make sure CW log group exists befpre /ecs/my-nginx-task
