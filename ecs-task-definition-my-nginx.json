@@ -49,5 +49,16 @@
         "Memory": "2048"
       }
     }
+  },
+  "Outputs": {
+    "TaskDefinitionArn": {
+      "Description": "The ARN of the ECS task definition.",
+      "Value": {
+        "Ref": "MyNginxTaskDefinition"
+      },
+      "Export": {
+        "Name": "MyNginxTaskDefinitionArn"
+      }
+    }
   }
 }
