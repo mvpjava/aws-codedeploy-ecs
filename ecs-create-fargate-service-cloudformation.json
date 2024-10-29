@@ -32,8 +32,8 @@
       "Type": "AWS::ECS::Service",
       "Properties": {
         "Cluster": {
-			"Fn::ImportValue": "ECSClusterName"
-		},
+		"Fn::ImportValue": "ECSClusterName"
+	},
         "CapacityProviderStrategy": [
           {
             "CapacityProvider": "FARGATE",
@@ -41,7 +41,9 @@
             "Weight": 1
           }
         ],
-        "TaskDefinition": "arn:aws:ecs:eu-west-2:403177882230:task-definition/my-nginx-task:1",
+        "TaskDefinition": {
+		"Fn::ImportValue": "MyNginxTaskDefinitionArn" 
+	},
         "ServiceName": "my-nginx-service",
         "SchedulingStrategy": "REPLICA",
         "DesiredCount": 2,
