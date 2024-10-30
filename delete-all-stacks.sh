@@ -31,11 +31,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo "Waiting for Stack to be complete ..."
-
-aws cloudformation wait stack-create-complete \
-	    --stack-name $ECS_TASK_STACK_NAME
-
 echo "stack $ECS_TASK_STACK_NAME deleted"
 
 ###################################################################
