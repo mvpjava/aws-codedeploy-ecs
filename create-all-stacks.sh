@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "$0: Creating all stacks ..."
+echo "$0: Creating all infrastructure stacks for CodeDeploy ecs demo ..."
 ./create-ecs-cluster-stack.sh ecs-cluster
 
 # Check if the last command was successful

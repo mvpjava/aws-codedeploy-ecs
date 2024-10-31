@@ -126,6 +126,26 @@
         ]
       }
     },
+    "TargetGroup2": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckPath": "/",
+        "Name": "ecs-my-ecs-my-nginx-service2",
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetType": "ip",
+        "HealthCheckProtocol": "HTTP",
+        "VpcId": {
+          "Ref": "VpcID"
+        },
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "0"
+          }
+        ]
+      }
+    },
     "Listener": {
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
       "Properties": {
@@ -141,6 +161,24 @@
           "Ref": "LoadBalancer"
         },
         "Port": 80,
+        "Protocol": "HTTP"
+      }
+    },
+    "Listener2": {
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+      "Properties": {
+        "DefaultActions": [
+          {
+            "Type": "forward",
+            "TargetGroupArn": {
+              "Ref": "TargetGroup2"
+            }
+          }
+        ],
+        "LoadBalancerArn": {
+          "Ref": "LoadBalancer"
+        },
+        "Port": 8080,
         "Protocol": "HTTP"
       }
     }
@@ -165,15 +203,27 @@
       }
     },
     "Listener": {
-      "Description": "The created listener.",
+      "Description": "The created listener for blue deployment.",
       "Value": {
         "Ref": "Listener"
+      }
+    },
+    "Listener2": {
+      "Description": "The created listener2 for green deployment. Validtion tests with test traffic", 
+      "Value": {
+        "Ref": "Listener2"
       }
     },
     "TargetGroup": {
       "Description": "The created target group.",
       "Value": {
         "Ref": "TargetGroup"
+      }
+    },
+    "TargetGroup2": {
+      "Description": "The created target group. Contains Task Set for green deployment",
+      "Value": {
+        "Ref": "TargetGroup2"
       }
     }
   }
