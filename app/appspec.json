@@ -8,7 +8,7 @@
           "TaskDefinition": "arn:aws:ecs:aws-region-id:aws-account-id:task-definition/ecs-demo-task-definition:revision-number",
           "LoadBalancerInfo": {
             "ContainerName": "your-container-name",
-            "ContainerPort": your-container-port
+            "ContainerPort": "your-container-port"
           }
         }
       }
