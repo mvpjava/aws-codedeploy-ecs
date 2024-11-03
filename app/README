@@ -7,15 +7,21 @@ perform the following steps in order
    - updates index.html with new version number to be displayed in HTML (used to confirm deployment of new version)
    - will call push-to-ecr.sh
 
-2) update-appspec.sh
-   - will make aws ecs cli command to get new task definition arn, docker container name and port and update appspec.json
+2) update-task-definition.sh
+   - substitutes the newly build image name (ECR URI) into template task-new-rev-def-template.json
+   - registered new task revision with ecs
 
+3) update-appspec.sh
+   - will make aws ecs cli command to get new task definition arn, docker container name and port and update appspec.json
 
 Note: 
 
 ecs-get-task-definition.sh:
  - is not called from any of the scripts, its just a 1-off script if ever you wanted to inspect thre entire json tree
 
+task-new-rev-def-template.json:
+  - template file which is referenced by script update-task-definition.sh to create new task revision. This will describe
+    the new software to deploy via other ALB Target group once Blue/Green performed in CodeDeploy.
 
 clean-up-images.sh:
  - Clean up script to remove all previous demo images 
