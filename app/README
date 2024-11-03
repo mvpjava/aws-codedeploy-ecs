@@ -1,0 +1,21 @@
+perform the following steps in order
+
+1) build_and_run.sh 2.0
+   - specify new version number as input arg (defaults to version 1.0)
+   - uses Dockerfile to create a new docker image and then tags it with specified version #
+   - Also created another tag with same version # for aws ecr
+   - updates index.html with new version number to be displayed in HTML (used to confirm deployment of new version)
+   - will call push-to-ecr.sh
+
+2) update-appspec.sh
+   - will make aws ecs cli command to get new task definition arn, docker container name and port and update appspec.json
+
+
+Note: 
+
+ecs-get-task-definition.sh:
+ - is not called from any of the scripts, its just a 1-off script if ever you wanted to inspect thre entire json tree
+
+
+clean-up-images.sh:
+ - Clean up script to remove all previous demo images 
