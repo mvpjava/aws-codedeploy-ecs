@@ -1,0 +1,32 @@
+{
+  "family": "my-nginx-task",
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::403177882230:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::403177882230:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "my-nginx",
+      "image": "SUBSTITUTE_ECR_URI_HERE",
+      "cpu": 1024,
+      "memory": 2048,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/my-nginx-task",
+          "awslogs-region": "eu-west-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048"
+}
