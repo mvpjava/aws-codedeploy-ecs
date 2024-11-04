@@ -27,10 +27,18 @@ docker tag "my-nginx:$VERSION" $ECR_URI
 #Listing all docker images with name my-nginx in it
 docker images | grep my-nginx
 
+# Update the task revision template file with new image:tag
+./update-task-definition.sh $ECR_URI
+
+# Update appspec.json file with new task defn arn, container name and port
+./update-appspec.sh my-nginx-task
+
+# Copy appspec.json (and all directory contents) to S3 buckey where CodeDeploy can find it
+aws s3 sync . s3://codedeploy-triomni-ecs/my-nginx/
+
 # Clean up any containers left around from previous runs since container name is hardcoded
 # This is just from local testing used for demo purposes
 docker container rm -f my-nginx-container 2>/dev/null
-
 docker run -it --rm -d -p 8081:80 --name "my-nginx-container" "my-nginx:$VERSION"
 
 # Output the version being used
