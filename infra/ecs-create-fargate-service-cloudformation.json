@@ -155,24 +155,6 @@
         "Port": 80,
         "Protocol": "HTTP"
       }
-    },
-    "Listener2": {
-      "Type": "AWS::ElasticLoadBalancingV2::Listener",
-      "Properties": {
-        "DefaultActions": [
-          {
-            "Type": "forward",
-            "TargetGroupArn": {
-              "Ref": "TargetGroup2"
-            }
-          }
-        ],
-        "LoadBalancerArn": {
-          "Ref": "LoadBalancer"
-        },
-        "Port": 8080,
-        "Protocol": "HTTP"
-      }
     }
   },
   "Outputs": {
@@ -198,12 +180,6 @@
       "Description": "The created listener for blue deployment.",
       "Value": {
         "Ref": "Listener"
-      }
-    },
-    "Listener2": {
-      "Description": "The created listener2 for green deployment. Validtion tests with test traffic", 
-      "Value": {
-        "Ref": "Listener2"
       }
     },
     "TargetGroup": {
