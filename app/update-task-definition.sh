@@ -2,15 +2,20 @@
 
 echo "$0 started"
 
+ECR_URI="403177882230.dkr.ecr.eu-west-2.amazonaws.com/my-nginx"
 TASK_REVISION_FILE="./task-new-rev-def-template.json"
 
-LATEST_IMAGE_TAG=$(docker images 403177882230.dkr.ecr.eu-west-2.amazonaws.com/my-nginx --format "{{.Repository}}:{{.Tag}}" | head -n 1)
+if [ "$#" -ne 1 ]; then
+  # Get latest image:tag built as default when not specified
+  ECR_URI=$(docker images $ECR_URI --format "{{.Repository}}:{{.Tag}}" | head -n 1)
+  echo "fully qualified Image name not specified. Defaulting to $LATEST_IMAGE_TAG"
+else
+  ECR_URI=$1
+fi
 
-echo "Latest Image Tag: $LATEST_IMAGE_TAG"
+echo "Updating $TASK_REVISION_FILE with  container image: $ECR_URI"
 
-echo "Updating $TASK_REVISION_FILE with  container image: $LATEST_IMAGE_TAG"
-
-sed -i "s|\"image\": \".*\"|\"image\": \"$LATEST_IMAGE_TAG\"|" "$TASK_REVISION_FILE"
+sed -i "s|\"image\": \".*\"|\"image\": \"$ECR_URI\"|" "$TASK_REVISION_FILE"
 
 echo "Dumping $TASK_REVISION_FILE"
 cat $TASK_REVISION_FILE
