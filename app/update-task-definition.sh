@@ -21,6 +21,6 @@ echo "Dumping $TASK_REVISION_FILE"
 cat $TASK_REVISION_FILE
 
 # Register the new task definition (now has updated image with new software version #)
-aws ecs register-task-definition --cli-input-json file://$TASK_REVISION_FILE --output table
+aws ecs register-task-definition --cli-input-json file://$TASK_REVISION_FILE --output json 
 
 echo "$0 complete."
