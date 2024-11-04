@@ -1,12 +1,16 @@
 {
   "family": "my-nginx-task",
+  "runtimePlatform": {
+    "cpuArchitecture": "ARM64",
+    "operatingSystemFamily": "LINUX"
+   },
   "networkMode": "awsvpc",
   "executionRoleArn": "arn:aws:iam::403177882230:role/ecsTaskExecutionRole",
   "taskRoleArn": "arn:aws:iam::403177882230:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
       "name": "my-nginx",
-      "image": "SUBSTITUTE_ECR_URI_HERE",
+      "image": "403177882230.dkr.ecr.eu-west-2.amazonaws.com/my-nginx:2.0",
       "cpu": 1024,
       "memory": 2048,
       "essential": true,
