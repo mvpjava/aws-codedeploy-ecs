@@ -7,12 +7,12 @@ perform the following steps in order
    - updates index.html with new version number to be displayed in HTML (used to confirm deployment of new version)
    - will call push-to-ecr.sh
 
-2) update-task-definition.sh
-   - substitutes the newly build image name (ECR URI) into template task-new-rev-def-template.json
-   - registered new task revision with ecs
+   - calls update-task-definition.sh
+     - substitutes the newly build image name (ECR URI) into template task-new-rev-def-template.json
+     - registered new task revision with ecs
 
-3) update-appspec.sh
-   - will make aws ecs cli command to get new task definition arn, docker container name and port and update appspec.json
+   - calls update-appspec.sh
+     - will make aws ecs cli command to get new task definition arn, docker container name and port and update appspec.json
 
 Note: 
 
