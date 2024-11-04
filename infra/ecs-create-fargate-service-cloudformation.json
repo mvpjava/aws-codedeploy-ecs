@@ -81,7 +81,7 @@
           }
         },
         "DeploymentController": {
-          "Type": "ECS"
+          "Type": "CODE_DEPLOY"
         },
         "ServiceConnectConfiguration": {
           "Enabled": false
